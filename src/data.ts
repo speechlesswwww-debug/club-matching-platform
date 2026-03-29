@@ -14,6 +14,7 @@ export interface Club {
   matchKeywords: string[];
   memberCount: number;
   coverImage: string;
+  gradientBg: string;
 }
 
 export const clubs: Club[] = [
@@ -32,7 +33,8 @@ export const clubs: Club[] = [
     customQuestions: ["请介绍你的音乐背景", "你最喜欢的歌曲类型是什么"],
     matchKeywords: ["创意表达", "艺术", "团队协作", "音乐", "表演"],
     memberCount: 56,
-    coverImage: "https://picsum.photos/seed/1/800/400",
+    coverImage: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
   },
   {
     id: "2",
@@ -49,7 +51,8 @@ export const clubs: Club[] = [
     customQuestions: ["你用什么相机设备", "分享一张你拍的照片"],
     matchKeywords: ["创意表达", "艺术", "视觉", "技术探索"],
     memberCount: 42,
-    coverImage: "https://picsum.photos/seed/2/800/400",
+    coverImage: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
   },
   {
     id: "3",
@@ -66,7 +69,8 @@ export const clubs: Club[] = [
     customQuestions: ["你有书法基础吗", "你对哪种书体最感兴趣"],
     matchKeywords: ["学术研究", "传统文化", "艺术", "创意表达"],
     memberCount: 38,
-    coverImage: "https://picsum.photos/seed/3/800/400",
+    coverImage: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #434343 0%, #000000 100%)",
   },
   {
     id: "4",
@@ -83,7 +87,8 @@ export const clubs: Club[] = [
     customQuestions: ["你目前的跑步水平如何", "你的运动目标是什么"],
     matchKeywords: ["运动健将", "健康生活", "挑战自我"],
     memberCount: 89,
-    coverImage: "https://picsum.photos/seed/4/800/400",
+    coverImage: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
   },
   {
     id: "5",
@@ -100,7 +105,8 @@ export const clubs: Club[] = [
     customQuestions: ["你打篮球几年了", "你在球队中擅长什么位置"],
     matchKeywords: ["运动健将", "团队协作", "社交活力", "竞技"],
     memberCount: 75,
-    coverImage: "https://picsum.photos/seed/5/800/400",
+    coverImage: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
   },
   {
     id: "6",
@@ -117,7 +123,8 @@ export const clubs: Club[] = [
     customQuestions: ["你的羽毛球技术水平如何", "你偏好单打还是双打"],
     matchKeywords: ["运动健将", "社交活力", "休闲"],
     memberCount: 63,
-    coverImage: "https://picsum.photos/seed/6/800/400",
+    coverImage: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
   },
   {
     id: "7",
@@ -134,7 +141,8 @@ export const clubs: Club[] = [
     customQuestions: ["你做过哪些志愿服务", "你为什么想加入志愿者协会"],
     matchKeywords: ["公益服务", "社交活力", "团队协作", "社会责任"],
     memberCount: 112,
-    coverImage: "https://picsum.photos/seed/7/800/400",
+    coverImage: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
   },
   {
     id: "8",
@@ -151,7 +159,8 @@ export const clubs: Club[] = [
     customQuestions: ["你对哪个环保议题最关注", "你有什么环保实践经验"],
     matchKeywords: ["公益服务", "学术研究", "社会责任"],
     memberCount: 47,
-    coverImage: "https://picsum.photos/seed/8/800/400",
+    coverImage: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)",
   },
   {
     id: "9",
@@ -168,7 +177,8 @@ export const clubs: Club[] = [
     customQuestions: ["你对哪个国际议题最感兴趣", "你有MUN经历吗"],
     matchKeywords: ["学术研究", "社交活力", "技术探索", "国际视野"],
     memberCount: 58,
-    coverImage: "https://picsum.photos/seed/9/800/400",
+    coverImage: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
   },
   {
     id: "10",
@@ -185,7 +195,8 @@ export const clubs: Club[] = [
     customQuestions: ["你的英语水平如何（四六级/托福）", "你有公开演讲经验吗"],
     matchKeywords: ["学术研究", "社交活力", "创意表达"],
     memberCount: 44,
-    coverImage: "https://picsum.photos/seed/10/800/400",
+    coverImage: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
   },
   {
     id: "11",
@@ -202,7 +213,8 @@ export const clubs: Club[] = [
     customQuestions: ["你掌握哪些编程语言", "介绍你做过的一个项目"],
     matchKeywords: ["技术探索", "创新创业", "学术研究"],
     memberCount: 83,
-    coverImage: "https://picsum.photos/seed/11/800/400",
+    coverImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
   },
   {
     id: "12",
@@ -219,7 +231,8 @@ export const clubs: Club[] = [
     customQuestions: ["你有什么创业想法", "你认为自己的核心优势是什么"],
     matchKeywords: ["创新创业", "技术探索", "社交活力"],
     memberCount: 69,
-    coverImage: "https://picsum.photos/seed/12/800/400",
+    coverImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #f7971e 0%, #ffd200 100%)",
   },
 ];
 
