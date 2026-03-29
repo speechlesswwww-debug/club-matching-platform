@@ -28,6 +28,8 @@ const BANNERS = [
 
 const HOT_TAGS = ["编程", "音乐", "志愿服务", "篮球", "摄影", "创业"];
 
+const SUGGESTIONS_HIDE_DELAY = 150;
+
 export function StudentHomePage() {
   const nav = useNavigate();
   const { darkMode, toggleDarkMode } = useTheme();
@@ -91,7 +93,7 @@ export function StudentHomePage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onFocus={() => setShowSuggestions(true)}
-              onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), SUGGESTIONS_HIDE_DELAY)}
               className="w-full glass-orange text-white placeholder-orange-200 rounded-2xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
               placeholder="搜索社团名称、标签或描述..."
             />

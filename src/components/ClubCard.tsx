@@ -31,6 +31,8 @@ const CATEGORY_BADGE: Record<string, string> = {
   创业: "bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400",
 };
 
+const MAX_VISIBLE_TAGS = 3;
+
 export function ClubCard({ club, showScore, rank }: ClubCardProps) {
   const nav = useNavigate();
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -90,7 +92,7 @@ export function ClubCard({ club, showScore, rank }: ClubCardProps) {
             </div>
           </div>
           <div className="flex flex-wrap gap-1 mb-2">
-            {club.tags.slice(0, 3).map((tag) => (
+            {club.tags.slice(0, MAX_VISIBLE_TAGS).map((tag) => (
               <span key={tag} className="text-xs bg-orange-50 dark:bg-orange-900/20 text-orange-500 dark:text-orange-400 rounded-full px-2 py-0.5 font-medium">
                 #{tag}
               </span>

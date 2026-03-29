@@ -71,9 +71,8 @@ export function RadarChart({ data, size = 200 }: RadarChartProps) {
         );
       })}
 
-      {/* Data area with gradient fill */}
-      <path d={dataPath} fill={`url(#${gradientId})`} stroke="#f97316" strokeWidth="2" filter={`url(#${glowId})`} />
-      <path d={dataPath} fill="none" stroke="#fbbf24" strokeWidth="1.5" opacity="0.6" />
+      {/* Data area with gradient fill and glow */}
+      <path d={dataPath} fill={`url(#${gradientId})`} stroke="#f97316" strokeWidth="2" strokeOpacity="0.9" filter={`url(#${glowId})`} />
 
       {/* Data points */}
       {dataPoints.map((p, i) => (
