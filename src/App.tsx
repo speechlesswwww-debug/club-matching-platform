@@ -620,6 +620,14 @@ export default function App() {
         <Route path="/student/applications" element={<ApplicationsPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
       </Routes>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AnimatedRoutes />
     </BrowserRouter>
   );
 }

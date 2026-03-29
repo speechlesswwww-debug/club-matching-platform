@@ -236,7 +236,7 @@ export const clubs: Club[] = [
   },
 ];
 
-export const assessmentQuestions = [
+export const assessmentQuestions: AssessmentQuestion[] = [
   {
     id: 1,
     question: "你最享受的课余活动是什么？",
@@ -317,6 +317,46 @@ export const assessmentQuestions = [
       { text: "为他人或社会带来了实质改变", keywords: ["公益服务"] },
     ],
   },
+  {
+    id: 9,
+    question: "遇到难题时，你的第一反应是？",
+    options: [
+      { text: "查资料、研究文献，深入分析", keywords: ["学术研究"] },
+      { text: "找人商量，集思广益", keywords: ["社交活力"] },
+      { text: "动手实验，尝试各种方案", keywords: ["技术探索"] },
+      { text: "换个角度，用创意解决", keywords: ["创意表达"] },
+    ],
+  },
+  {
+    id: 10,
+    question: "你最喜欢的学习方式是？",
+    options: [
+      { text: "系统学习，打好理论基础", keywords: ["学术研究"] },
+      { text: "边做边学，在实践中成长", keywords: ["技术探索", "运动健将"] },
+      { text: "跟同伴互相学习，共同进步", keywords: ["社交活力", "公益服务"] },
+      { text: "自由探索，发挥个人创造力", keywords: ["创意表达"] },
+    ],
+  },
+  {
+    id: 11,
+    question: "如果你可以为社团贡献一件事，你会选择？",
+    options: [
+      { text: "策划一场精彩的演出或展览", keywords: ["创意表达"] },
+      { text: "开发一个好用的管理系统", keywords: ["技术探索"] },
+      { text: "组织一次大型交流活动", keywords: ["社交活力"] },
+      { text: "发起一项有意义的公益项目", keywords: ["公益服务"] },
+    ],
+  },
+  {
+    id: 12,
+    question: "你平时最欣赏哪类人？",
+    options: [
+      { text: "有才华、有创造力的艺术家", keywords: ["创意表达"] },
+      { text: "技术精湛、能解决问题的工程师", keywords: ["技术探索"] },
+      { text: "有领导力、能带动团队的人", keywords: ["社交活力"] },
+      { text: "有爱心、为社会默默付出的人", keywords: ["公益服务", "学术研究"] },
+    ],
+  },
 ];
 
 export const profileTypes: Record<string, { emoji: string; desc: string }> = {
@@ -328,26 +368,19 @@ export const profileTypes: Record<string, { emoji: string; desc: string }> = {
   运动健将型: { emoji: "🏃", desc: "热爱运动，充满活力，适合体育运动类社团" },
 };
 
-export interface Application {
-  id: string;
-  clubId: string;
-  clubName: string;
-  status: "待审核" | "已通过" | "已拒绝";
-  appliedAt: string;
-  note?: string;
-}
-
 export const mockApplications: Application[] = [
   { id: "a1", clubId: "1", clubName: "星韵合唱团", status: "已通过", appliedAt: "2024-03-10", note: "欢迎加入！" },
   { id: "a2", clubId: "11", clubName: "编程极客社", status: "待审核", appliedAt: "2024-03-15" },
   { id: "a3", clubId: "7", clubName: "青年志愿者协会", status: "已拒绝", appliedAt: "2024-03-08", note: "名额已满，下次优先考虑" },
 ];
 
-export const adminApplicants = [
+export const adminApplicants: AdminApplicant[] = [
   { id: "u1", name: "李明", club: "编程极客社", status: "待审核", time: "2024-03-15 14:23", profile: "技术探索型" },
   { id: "u2", name: "王小红", club: "星韵合唱团", status: "已通过", time: "2024-03-14 09:12", profile: "创意表达型" },
   { id: "u3", name: "张伟", club: "青年志愿者协会", status: "待审核", time: "2024-03-16 16:45", profile: "公益服务型" },
   { id: "u4", name: "刘洋", club: "篮球俱乐部", status: "已通过", time: "2024-03-13 11:30", profile: "运动健将型" },
   { id: "u5", name: "陈美琳", club: "模拟联合国协会", status: "待审核", time: "2024-03-17 08:55", profile: "学术研究型" },
   { id: "u6", name: "赵子豪", club: "创新创业协会", status: "已拒绝", time: "2024-03-12 15:20", profile: "社交活力型" },
+  { id: "u7", name: "林晓雨", club: "街舞嘻哈社", status: "待审核", time: "2024-03-18 10:05", profile: "创意表达型" },
+  { id: "u8", name: "孙昊", club: "天文观测协会", status: "已通过", time: "2024-03-11 14:30", profile: "学术研究型" },
 ];
