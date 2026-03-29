@@ -1,19 +1,9 @@
-import { clubs, profileTypes, type Club } from "./data";
+import { clubs, profileTypes } from "./data";
+import type { Club, ClubMatch } from "./types";
+
+export type { ClubMatch };
 
 export type ProfileType = keyof typeof profileTypes;
-
-export function calculateProfile(_answers: number[][]): ProfileType {
-  const scores: Record<string, number> = {
-    创意表达型: 0,
-    技术探索型: 0,
-    社交活力型: 0,
-    公益服务型: 0,
-    学术研究型: 0,
-    运动健将型: 0,
-  };
-
-  return Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0] as ProfileType;
-}
 
 export function getProfileFromKeywords(selectedKeywords: string[]): ProfileType {
   const scores: Record<string, number> = {
@@ -45,39 +35,27 @@ export function getProfileFromKeywords(selectedKeywords: string[]): ProfileType 
   return sorted[0][0] as ProfileType;
 }
 
-export interface ClubMatch {
-  club: Club;
-  score: number;
-  reason: string;
-}
-
 export function matchClubs(selectedKeywords: string[]): ClubMatch[] {
   const profileType = getProfileFromKeywords(selectedKeywords);
-
   const profileKeyword = profileType.replace("型", "");
 
   const results: ClubMatch[] = clubs.map((club) => {
     let score = 0;
 
-    // Check direct keyword matches
     selectedKeywords.forEach((kw) => {
       if (club.matchKeywords.some((mk) => mk.includes(kw) || kw.includes(mk))) {
         score += 20;
       }
     });
 
-    // Check profile match
     if (club.matchKeywords.some((mk) => mk.includes(profileKeyword))) {
       score += 15;
     }
 
-    // Beginner friendly bonus
     score += club.beginnerFriendly * 2;
 
-    // Recruiting bonus
     if (club.isRecruiting) score += 5;
 
-    // Cap at 99
     score = Math.min(score, 99);
     score = Math.max(score, 30);
 
