@@ -6,18 +6,10 @@ import { matchClubs, getProfileFromKeywords, type ClubMatch } from "./matching";
 function BottomNav({ active }: { active: "home" | "assessment" | "applications" }) {
   return (
     <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-gray-100 flex justify-around py-2 z-50">
-      <Link to="/student/home" className={`flex flex-col items-center gap-0.5 px-4 py-1 rounded-xl ${active === "home" ? "text-orange-500" : "text-gray-400"}`}>
-        <span className="text-xl">🏠</span>
-        <span className="text-xs">首页</span>
-      </Link>
-      <Link to="/student/assessment" className={`flex flex-col items-center gap-0.5 px-4 py-1 rounded-xl ${active === "assessment" ? "text-orange-500" : "text-gray-400"}`}>
-        <span className="text-xl">✨</span>
-        <span className="text-xs">AI测评</span>
-      </Link>
-      <Link to="/student/applications" className={`flex flex-col items-center gap-0.5 px-4 py-1 rounded-xl ${active === "applications" ? "text-orange-500" : "text-gray-400"}`}>
-        <span className="text-xl">📋</span>
-        <span className="text-xs">我的申请</span>
-      </Link>
+      <Link to="/student/home" className={`flex flex-col items-center gap-0.5 px-4 py-1 rounded-xl ${active === "home" ? "text-orange-500" : "text-gray-400"}`}></Link>
+      <Link to="/student/assessment" className={`flex flex-col items-center gap-0.5 px-4 py-1 rounded-xl ${active === "assessment" ? "text-orange-500" : "text-gray-400"}`}></Link>
+      <Link to="/student/applications" className={`flex flex-col items-center gap-0.5 px-4 py-1 rounded-xl ${active === "applications" ? "text-orange-500" : "text-gray-400"}`}></Link>
+      <Link to="/" className="flex flex-col items-center gap-0.5 px-4 py-1 rounded-xl text-gray-400"></Link>
     </nav>
   );
 }
@@ -69,9 +61,7 @@ function StudentLoginPage() {
             <label className="text-sm text-gray-600 block mb-1">密码</label>
             <input type="password" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-400" placeholder="请输入密码" defaultValue="demo123" />
           </div>
-          <button onClick={() => nav("/student/home")} className="w-full bg-orange-500 text-white rounded-xl py-4 font-bold text-base hover:bg-orange-600">
-            以新生身份体验 Demo →
-          </button>
+          <button onClick={() => nav("/student/home")} className="w-full bg-orange-500 text-white rounded-xl py-4 font-bold text-base hover:bg-orange-600">以新生身份体验 Demo →</button>
           <p className="text-center text-xs text-gray-400">点击按钮即可直接体验，无需真实账号</p>
         </div>
       </div>
@@ -99,9 +89,7 @@ function AdminLoginPage() {
             <label className="text-sm text-gray-600 block mb-1">密码</label>
             <input type="password" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-400" placeholder="密码" defaultValue="admin123" />
           </div>
-          <button onClick={() => nav("/admin/dashboard")} className="w-full bg-orange-500 text-white rounded-xl py-4 font-bold text-base hover:bg-orange-600">
-            以管理者身份体验 Demo →
-          </button>
+          <button onClick={() => nav("/admin/dashboard")} className="w-full bg-orange-500 text-white rounded-xl py-4 font-bold text-base hover:bg-orange-600">以管理者身份体验 Demo →</button>
           <p className="text-center text-xs text-gray-400">点击按钮即可直接体验，无需真实账号</p>
         </div>
       </div>
@@ -153,7 +141,7 @@ function StudentHomePage() {
 
         <div className="flex gap-2 overflow-x-auto pb-2 mb-5">
           {CATEGORIES.map((cat) => (
-            <button key={cat} onClick={() => setActiveCategory(cat)} className={`flex-shrink-0 px-3 py-1 rounded-full text-sm font-medium transition-colors ${activeCategory === cat ? "bg-orange-500 text-white" : "bg-white text-gray-500 border border-gray-100"}`}>
+            <button key={cat} onClick={() => setActiveCategory(cat)} className={`flex-shrink-0 px-3 py-1 rounded-full text-sm font-medium transition-colors ${activeCategory === cat ? "bg-orange-500 text-white" : "bg-white text-gray-500 border border-gray-100"}`}> 
               {cat}
             </button>
           ))}
@@ -249,7 +237,7 @@ function AssessmentPage() {
 function RecommendationsPage() {
   const nav = useNavigate();
   const state = window.history.state?.usr as { keywords: string[]; profile: string } | undefined;
-  const keywords = state?.keywords || ["创意表达"];
+  const keywords = state?.keywords || ["创意表达"]; 
   const profile = state?.profile || "创意表达型";
   const matches = matchClubs(keywords);
   const profileInfo = profileTypes[profile] || { emoji: "🌟", desc: "综合型人才" };
@@ -470,7 +458,7 @@ function AdminDashboardPage() {
             <p className="text-gray-500 text-sm">管理后台</p>
             <h1 className="text-xl font-bold text-gray-900">JoinU 数据看板</h1>
           </div>
-          <button onClick={() => nav("/")} className="text-sm text-gray-400 border border-gray-200 rounded-full px-3 py-1">退出</button>
+          <button onClick={() => nav("/")} className="text-sm text-white bg-orange-500 hover:bg-orange-600 rounded-full px-4 py-2 font-medium shadow-sm transition-colors">🔄 返回入口</button>
         </div>
 
         <div className="grid grid-cols-2 gap-3 mb-6">
