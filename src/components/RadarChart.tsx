@@ -1,0 +1,90 @@
+interface RadarChartProps {
+  data: { label: string; value: number; max?: number }[];
+  size?: number;
+}
+
+export function RadarChart({ data, size = 200 }: RadarChartProps) {
+  const center = size / 2;
+  const radius = (size / 2) * 0.7;
+  const n = data.length;
+
+  const getPoint = (index: number, r: number) => {
+    const angle = (Math.PI * 2 * index) / n - Math.PI / 2;
+    return {
+      x: center + r * Math.cos(angle),
+      y: center + r * Math.sin(angle),
+    };
+  };
+
+  const gridLevels = [0.25, 0.5, 0.75, 1];
+
+  const dataPoints = data.map((d, i) => {
+    const val = (d.value / (d.max || 10)) * radius;
+    return getPoint(i, val);
+  });
+
+  const dataPath = dataPoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ") + " Z";
+
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="overflow-visible">
+      {/* Grid circles */}
+      {gridLevels.map((level, li) => {
+        const gridPoints = data.map((_, i) => getPoint(i, radius * level));
+        const path = gridPoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ") + " Z";
+        return (
+          <path
+            key={li}
+            d={path}
+            fill="none"
+            stroke="rgba(249,115,22,0.15)"
+            strokeWidth="1"
+          />
+        );
+      })}
+
+      {/* Axes */}
+      {data.map((_, i) => {
+        const end = getPoint(i, radius);
+        return (
+          <line
+            key={i}
+            x1={center}
+            y1={center}
+            x2={end.x}
+            y2={end.y}
+            stroke="rgba(249,115,22,0.2)"
+            strokeWidth="1"
+          />
+        );
+      })}
+
+      {/* Data area */}
+      <path d={dataPath} fill="rgba(249,115,22,0.2)" stroke="#f97316" strokeWidth="2" />
+
+      {/* Data points */}
+      {dataPoints.map((p, i) => (
+        <circle key={i} cx={p.x} cy={p.y} r="4" fill="#f97316" />
+      ))}
+
+      {/* Labels */}
+      {data.map((d, i) => {
+        const labelRadius = radius + 22;
+        const lp = getPoint(i, labelRadius);
+        return (
+          <text
+            key={i}
+            x={lp.x}
+            y={lp.y}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize="10"
+            fill="currentColor"
+            className="text-gray-600 dark:text-gray-400"
+          >
+            {d.label}
+          </text>
+        );
+      })}
+    </svg>
+  );
+}
