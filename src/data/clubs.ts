@@ -1,0 +1,237 @@
+export interface Club {
+  id: string
+  name: string
+  category: string
+  tags: string[]
+  description: string
+  activities: string[]
+  atmosphere: string
+  hoursPerWeek: number
+  beginnerFriendly: number
+  isRecruiting: boolean
+  recruitmentDirections: string[]
+  recruitmentProcess: string[]
+  customQuestions: string[]
+  matchKeywords: string[]
+  memberCount: number
+  coverImage: string
+}
+
+export const clubs: Club[] = [
+  {
+    id: '1',
+    name: '星韵合唱团',
+    category: '文艺',
+    tags: ['音乐', '表演', '创作'],
+    description: '星韵合唱团成立于2010年，是学校最具影响力的合唱团体。我们以音乐连接心灵，每年参加省级以上合唱比赛并多次获奖。',
+    activities: ['每周合唱排练', '学期汇报演出', '参加省级合唱比赛', '社区文艺演出'],
+    atmosphere: '温暖和谐，大家在音乐中建立深厚友谊，社团氛围轻松愉快又专业严谨。',
+    hoursPerWeek: 4,
+    beginnerFriendly: 4,
+    isRecruiting: true,
+    recruitmentDirections: ['女高音', '男低音', '钢琴伴奏'],
+    recruitmentProcess: ['提交申请', '音乐测试', '试唱面试', '录取通知'],
+    customQuestions: ['请描述你的音乐经历', '你最喜欢的音乐类型是什么？', '你能参加每周固定排练吗？'],
+    matchKeywords: ['音乐', '唱歌', '表演', '艺术', '创作', '文艺'],
+    memberCount: 68,
+    coverImage: 'https://picsum.photos/seed/choir/800/400'
+  },
+  {
+    id: '2',
+    name: '光影摄影社',
+    category: '文艺',
+    tags: ['摄影', '创作', '艺术'],
+    description: '光影摄影社致力于用镜头记录校园生活之美。我们定期举办摄影展、外拍活动和技术分享会，让每位社员都能提升摄影技能。',
+    activities: ['外拍采风', '摄影展览', '技术分享会', '暗室冲印体验'],
+    atmosphere: '自由创意，每个人都有自己独特的视角和风格，社团鼓励创新和个性表达。',
+    hoursPerWeek: 3,
+    beginnerFriendly: 5,
+    isRecruiting: true,
+    recruitmentDirections: ['摄影师', '后期修图', '策展设计'],
+    recruitmentProcess: ['提交申请', '作品集审核', '面试交流', '录取通知'],
+    customQuestions: ['你是否有摄影器材？', '请分享1-3张你拍摄的照片', '你最感兴趣的摄影方向是什么？'],
+    matchKeywords: ['摄影', '艺术', '创作', '视觉', '设计', '文艺'],
+    memberCount: 45,
+    coverImage: 'https://picsum.photos/seed/photography/800/400'
+  },
+  {
+    id: '3',
+    name: '墨韵书法社',
+    category: '文艺',
+    tags: ['书法', '传统文化', '艺术'],
+    description: '墨韵书法社传承中华书法艺术，开展楷书、行书、草书等多种书体教学，让同学们在笔墨中感受传统文化魅力。',
+    activities: ['每周书法练习', '书法展览', '文化讲座', '笔会交流'],
+    atmosphere: '宁静致远，在墨香中修身养性，感受中国传统文化的深厚底蕴。',
+    hoursPerWeek: 2,
+    beginnerFriendly: 5,
+    isRecruiting: true,
+    recruitmentDirections: ['楷书组', '行草组', '篆刻组'],
+    recruitmentProcess: ['提交申请', '书法测试', '录取通知'],
+    customQuestions: ['你有书法基础吗？', '你对哪种书体最感兴趣？'],
+    matchKeywords: ['书法', '传统文化', '艺术', '写作', '手工', '文艺'],
+    memberCount: 32,
+    coverImage: 'https://picsum.photos/seed/calligraphy/800/400'
+  },
+  {
+    id: '4',
+    name: '风行跑步社',
+    category: '体育',
+    tags: ['跑步', '健身', '户外'],
+    description: '风行跑步社是学校最活跃的跑步团体，每周组织晨跑、夜跑活动，参加各类马拉松赛事，让跑步成为一种生活方式。',
+    activities: ['每日晨跑', '周末长跑', '马拉松比赛', '跑步技术训练'],
+    atmosphere: '热血拼搏，充满正能量！大家互相鼓励，共同突破自我极限。',
+    hoursPerWeek: 5,
+    beginnerFriendly: 4,
+    isRecruiting: true,
+    recruitmentDirections: ['长跑组', '短跑组', '竞赛组'],
+    recruitmentProcess: ['提交申请', '体能测试', '录取通知'],
+    customQuestions: ['你目前的跑步水平如何？', '你能参加早上6点的晨跑吗？', '你有没有参加过马拉松比赛？'],
+    matchKeywords: ['跑步', '运动', '健身', '户外', '竞技', '体育'],
+    memberCount: 156,
+    coverImage: 'https://picsum.photos/seed/running/800/400'
+  },
+  {
+    id: '5',
+    name: '篮球俱乐部',
+    category: '体育',
+    tags: ['篮球', '竞技', '团队'],
+    description: '篮球俱乐部是学校历史最悠久的体育社团之一，拥有标准训练场地，定期参加校际联赛和市级比赛。',
+    activities: ['日常训练', '校内联赛', '校际比赛', '篮球教学'],
+    atmosphere: '热血竞技，团队协作，在球场上挥洒汗水，结交志同道合的朋友。',
+    hoursPerWeek: 6,
+    beginnerFriendly: 3,
+    isRecruiting: true,
+    recruitmentDirections: ['前锋', '后卫', '中锋'],
+    recruitmentProcess: ['提交申请', '技术测试', '对抗赛考核', '录取通知'],
+    customQuestions: ['你打篮球几年了？', '你擅长哪个位置？', '你能参加每周三次训练吗？'],
+    matchKeywords: ['篮球', '运动', '竞技', '团队', '体育'],
+    memberCount: 48,
+    coverImage: 'https://picsum.photos/seed/basketball/800/400'
+  },
+  {
+    id: '6',
+    name: '羽毛球协会',
+    category: '体育',
+    tags: ['羽毛球', '竞技', '健康'],
+    description: '羽毛球协会为羽毛球爱好者提供专业训练场地和指导，定期举办协会内部赛事，组队参加校际联赛。',
+    activities: ['技术训练', '协会内部赛', '友谊赛', '教学活动'],
+    atmosphere: '轻松活跃，运动健康，适合各种水平的爱好者，零基础也欢迎。',
+    hoursPerWeek: 3,
+    beginnerFriendly: 5,
+    isRecruiting: true,
+    recruitmentDirections: ['单打组', '双打组', '混双组'],
+    recruitmentProcess: ['提交申请', '技术评估', '录取通知'],
+    customQuestions: ['你的羽毛球水平如何（零基础/初级/中级/高级）？', '你更喜欢单打还是双打？'],
+    matchKeywords: ['羽毛球', '运动', '竞技', '健康', '体育'],
+    memberCount: 89,
+    coverImage: 'https://picsum.photos/seed/badminton/800/400'
+  },
+  {
+    id: '7',
+    name: '青年志愿者协会',
+    category: '公益',
+    tags: ['志愿服务', '公益', '社区'],
+    description: '青年志愿者协会是全校最大的公益社团，每年组织超过50次志愿活动，服务社区、关爱老人儿童，传递社会正能量。',
+    activities: ['敬老院探访', '支教活动', '环保公益', '社区服务'],
+    atmosphere: '温暖治愈，充满爱心。每一次志愿服务都让我们感受到付出的快乐和被需要的价值。',
+    hoursPerWeek: 3,
+    beginnerFriendly: 5,
+    isRecruiting: true,
+    recruitmentDirections: ['活动策划', '对外联络', '现场服务'],
+    recruitmentProcess: ['提交申请', '志愿精神考核', '录取通知'],
+    customQuestions: ['你做过哪些志愿服务？', '你为什么想加入志愿者协会？', '你对哪类公益活动最感兴趣？'],
+    matchKeywords: ['公益', '志愿', '社区', '帮助他人', '社交', '归属感'],
+    memberCount: 234,
+    coverImage: 'https://picsum.photos/seed/volunteer/800/400'
+  },
+  {
+    id: '8',
+    name: '绿色环保社',
+    category: '公益',
+    tags: ['环保', '公益', '可持续'],
+    description: '绿色环保社致力于校园环保宣传和实践，开展垃圾分类、节能减排等活动，培养同学们的环保意识。',
+    activities: ['校园环保活动', '环保知识宣传', '绿色创意大赛', '环境调研报告'],
+    atmosphere: '充满热情，关注环境，大家共同为建设绿色校园贡献力量。',
+    hoursPerWeek: 2,
+    beginnerFriendly: 5,
+    isRecruiting: true,
+    recruitmentDirections: ['宣传组', '活动策划', '调研组'],
+    recruitmentProcess: ['提交申请', '面试', '录取通知'],
+    customQuestions: ['你对哪些环保议题最关心？', '你有什么环保行动的经验？'],
+    matchKeywords: ['环保', '公益', '可持续', '社区', '探索'],
+    memberCount: 67,
+    coverImage: 'https://picsum.photos/seed/eco/800/400'
+  },
+  {
+    id: '9',
+    name: '模拟联合国协会',
+    category: '学术',
+    tags: ['模拟联合国', '辩论', '国际关系'],
+    description: '模拟联合国协会培养同学们的国际视野、辩论技能和外交思维，每年参加国内外多场MUN会议。',
+    activities: ['校内模拟联合国', '辩论培训', '时事讨论', '参加国际会议'],
+    atmosphere: '严谨专业，思维碰撞，在外交辩论中锻炼逻辑思维和语言表达能力。',
+    hoursPerWeek: 5,
+    beginnerFriendly: 3,
+    isRecruiting: true,
+    recruitmentDirections: ['代表团', '学术团队', '媒体团队'],
+    recruitmentProcess: ['提交申请', '笔试', '英语面试', '录取通知'],
+    customQuestions: ['你对哪些国际议题感兴趣？', '你的英语水平如何？', '你有MUN经验吗？'],
+    matchKeywords: ['辩论', '学术', '研究', '写作', '演讲', '国际'],
+    memberCount: 78,
+    coverImage: 'https://picsum.photos/seed/mun/800/400'
+  },
+  {
+    id: '10',
+    name: '英语演讲社',
+    category: '学术',
+    tags: ['英语', '演讲', '沟通'],
+    description: '英语演讲社帮助同学们提升英语口语和演讲技巧，定期举办英语演讲比赛和英语角活动。',
+    activities: ['英语角', '演讲比赛', '辩论赛', '外教交流活动'],
+    atmosphere: '轻松开放，鼓励大家勇于开口，不怕犯错，共同进步。',
+    hoursPerWeek: 3,
+    beginnerFriendly: 4,
+    isRecruiting: true,
+    recruitmentDirections: ['演讲组', '辩论组', '英语角组织'],
+    recruitmentProcess: ['提交申请', '英语口语测试', '录取通知'],
+    customQuestions: ['你的英语水平如何？', '你有演讲或辩论经历吗？', '你加入的主要目标是什么？'],
+    matchKeywords: ['英语', '演讲', '辩论', '沟通', '学术', '技能'],
+    memberCount: 112,
+    coverImage: 'https://picsum.photos/seed/english/800/400'
+  },
+  {
+    id: '11',
+    name: '编程极客社',
+    category: '科技创新',
+    tags: ['编程', '技术', '创新'],
+    description: '编程极客社是学校最具技术氛围的社团，涵盖Web开发、算法竞赛、人工智能等方向，定期举办黑客松和技术分享。',
+    activities: ['技术分享会', '算法竞赛', '黑客松', '项目实践'],
+    atmosphere: '极客精神，热爱技术，在代码中创造可能，解决真实问题。',
+    hoursPerWeek: 6,
+    beginnerFriendly: 3,
+    isRecruiting: true,
+    recruitmentDirections: ['前端开发', '后端开发', '算法竞赛', 'AI研究'],
+    recruitmentProcess: ['提交申请', '编程测试', '技术面试', '录取通知'],
+    customQuestions: ['你掌握哪些编程语言？', '你有没有参加过编程竞赛或做过项目？', '你最感兴趣的技术方向是什么？'],
+    matchKeywords: ['编程', '技术', '创新', '算法', '科技', '项目'],
+    memberCount: 143,
+    coverImage: 'https://picsum.photos/seed/coding/800/400'
+  },
+  {
+    id: '12',
+    name: '创新创业协会',
+    category: '创业',
+    tags: ['创业', '创新', '商业'],
+    description: '创新创业协会连接有创业梦想的同学，提供创业知识培训、导师资源对接和项目孵化支持，让校园创业梦想照进现实。',
+    activities: ['创业讲座', '商业计划书大赛', '创业导师对接', '项目路演'],
+    atmosphere: '充满活力和野心，大家带着梦想相聚，互相激励，探索商业可能。',
+    hoursPerWeek: 4,
+    beginnerFriendly: 4,
+    isRecruiting: true,
+    recruitmentDirections: ['项目策划', '市场运营', '技术开发', '融资对接'],
+    recruitmentProcess: ['提交申请', '创业想法分享', '面试', '录取通知'],
+    customQuestions: ['你有什么创业想法或项目？', '你擅长哪些方面（技术/运营/设计/商务）？', '你为什么想创业？'],
+    matchKeywords: ['创业', '创新', '商业', '技能', '项目', '探索'],
+    memberCount: 95,
+    coverImage: 'https://picsum.photos/seed/startup/800/400'
+  }
+]
