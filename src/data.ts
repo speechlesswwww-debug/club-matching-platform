@@ -1,4 +1,21 @@
-import type { Club, Application, AdminApplicant, AssessmentQuestion } from "./types";
+export interface Club {
+  id: string;
+  name: string;
+  category: string;
+  tags: string[];
+  description: string;
+  activities: string[];
+  atmosphere: string;
+  hoursPerWeek: number;
+  beginnerFriendly: number;
+  isRecruiting: boolean;
+  recruitmentDirections: string[];
+  customQuestions: string[];
+  matchKeywords: string[];
+  memberCount: number;
+  coverImage: string;
+  gradientBg: string;
+}
 
 export const clubs: Club[] = [
   {
@@ -16,17 +33,8 @@ export const clubs: Club[] = [
     customQuestions: ["请介绍你的音乐背景", "你最喜欢的歌曲类型是什么"],
     matchKeywords: ["创意表达", "艺术", "团队协作", "音乐", "表演"],
     memberCount: 56,
-    coverImage: "https://picsum.photos/seed/1/800/400",
-    reviews: [
-      { id: "r1", author: "小雅", avatar: "🎵", content: "加入合唱团是我大学最棒的决定！大家一起唱歌的感觉太美妙了。", rating: 5, date: "2024-01-15" },
-      { id: "r2", author: "阿明", avatar: "🎶", content: "每周排练压力不大，老师很有耐心，哪怕零基础也能快速融入。", rating: 5, date: "2024-02-08" },
-      { id: "r3", author: "晴晴", avatar: "🎤", content: "参加了校园音乐节表演，站在舞台上的感觉真的很特别！", rating: 4, date: "2024-03-01" },
-    ],
-    timeline: [
-      { date: "2024-09-01", event: "秋季纳新", description: "开始招募新成员" },
-      { date: "2024-10-15", event: "新生汇报演出", description: "新成员第一次正式登台" },
-      { date: "2024-12-20", event: "迎新晚会演出", description: "年度最大规模演出" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
   },
   {
     id: "2",
@@ -43,15 +51,8 @@ export const clubs: Club[] = [
     customQuestions: ["你用什么相机设备", "分享一张你拍的照片"],
     matchKeywords: ["创意表达", "艺术", "视觉", "技术探索"],
     memberCount: 42,
-    coverImage: "https://picsum.photos/seed/2/800/400",
-    reviews: [
-      { id: "r1", author: "小鱼", avatar: "📷", content: "即使是手机党也能在这里学到很多构图和光影知识，氛围超好！", rating: 5, date: "2024-02-10" },
-      { id: "r2", author: "阿杰", avatar: "🖼️", content: "每次采风都会发现校园里好多被忽视的美景，眼界大开。", rating: 5, date: "2024-03-05" },
-    ],
-    timeline: [
-      { date: "2024-09-10", event: "秋季纳新", description: "新成员加入" },
-      { date: "2024-11-01", event: "作品展览", description: "在图书馆展出成员摄影作品" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
   },
   {
     id: "3",
@@ -68,14 +69,8 @@ export const clubs: Club[] = [
     customQuestions: ["你有书法基础吗", "你对哪种书体最感兴趣"],
     matchKeywords: ["学术研究", "传统文化", "艺术", "创意表达"],
     memberCount: 38,
-    coverImage: "https://picsum.photos/seed/3/800/400",
-    reviews: [
-      { id: "r1", author: "文轩", avatar: "🖌️", content: "在这里学书法让我静下心来，从浮躁到沉稳，收获很大。", rating: 5, date: "2024-01-20" },
-    ],
-    timeline: [
-      { date: "2024-09-05", event: "秋季纳新", description: "招募热爱书法的新成员" },
-      { date: "2025-01-20", event: "春节书法联欢", description: "社员共同书写春联" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #434343 0%, #000000 100%)",
   },
   {
     id: "4",
@@ -92,15 +87,8 @@ export const clubs: Club[] = [
     customQuestions: ["你目前的跑步水平如何", "你的运动目标是什么"],
     matchKeywords: ["运动健将", "健康生活", "挑战自我"],
     memberCount: 89,
-    coverImage: "https://picsum.photos/seed/4/800/400",
-    reviews: [
-      { id: "r1", author: "小豪", avatar: "🏃", content: "刚入学不会跑步，现在半马都能完赛！感谢社团的系统训练。", rating: 5, date: "2024-03-12" },
-      { id: "r2", author: "云峰", avatar: "👟", content: "早上和大家一起跑步，整天都精力充沛，强烈推荐！", rating: 5, date: "2024-02-20" },
-    ],
-    timeline: [
-      { date: "2024-09-01", event: "新学期启动跑", description: "全员10公里迎新跑" },
-      { date: "2024-11-10", event: "城市半马参赛", description: "组队参加城市马拉松" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
   },
   {
     id: "5",
@@ -117,14 +105,8 @@ export const clubs: Club[] = [
     customQuestions: ["你打篮球几年了", "你在球队中擅长什么位置"],
     matchKeywords: ["运动健将", "团队协作", "社交活力", "竞技"],
     memberCount: 75,
-    coverImage: "https://picsum.photos/seed/5/800/400",
-    reviews: [
-      { id: "r1", author: "阿龙", avatar: "🏀", content: "每周训练强度适中，有专业教练指导，技术进步很快。", rating: 4, date: "2024-01-25" },
-    ],
-    timeline: [
-      { date: "2024-09-15", event: "秋季联赛开幕", description: "校内篮球联赛正式开始" },
-      { date: "2024-12-01", event: "冬季三对三", description: "举办全校三对三邀请赛" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
   },
   {
     id: "6",
@@ -141,14 +123,8 @@ export const clubs: Club[] = [
     customQuestions: ["你的羽毛球技术水平如何", "你偏好单打还是双打"],
     matchKeywords: ["运动健将", "社交活力", "休闲"],
     memberCount: 63,
-    coverImage: "https://picsum.photos/seed/6/800/400",
-    reviews: [
-      { id: "r1", author: "小蝶", avatar: "🏸", content: "每次打球都很开心，大家不管是高手还是新手都一起玩，氛围超棒！", rating: 5, date: "2024-02-14" },
-    ],
-    timeline: [
-      { date: "2024-09-10", event: "新学期开放日", description: "免费体验打球" },
-      { date: "2024-10-20", event: "校际邀请赛", description: "与兄弟院校切磋技艺" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
   },
   {
     id: "7",
@@ -165,16 +141,8 @@ export const clubs: Club[] = [
     customQuestions: ["你做过哪些志愿服务", "你为什么想加入志愿者协会"],
     matchKeywords: ["公益服务", "社交活力", "团队协作", "社会责任"],
     memberCount: 112,
-    coverImage: "https://picsum.photos/seed/7/800/400",
-    reviews: [
-      { id: "r1", author: "晨曦", avatar: "💝", content: "每次支教回来都很感动，孩子们的笑脸是最好的回报。", rating: 5, date: "2024-01-30" },
-      { id: "r2", author: "海涛", avatar: "🤝", content: "认识了很多志同道合的朋友，一起做公益，特别有意义。", rating: 5, date: "2024-03-08" },
-    ],
-    timeline: [
-      { date: "2024-09-01", event: "秋季纳新", description: "招募热心公益的新成员" },
-      { date: "2024-10-01", event: "国庆公益行", description: "走进社区开展志愿服务" },
-      { date: "2024-12-25", event: "圣诞爱心活动", description: "为孤儿院孩子送温暖" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
   },
   {
     id: "8",
@@ -191,14 +159,8 @@ export const clubs: Club[] = [
     customQuestions: ["你对哪个环保议题最关注", "你有什么环保实践经验"],
     matchKeywords: ["公益服务", "学术研究", "社会责任"],
     memberCount: 47,
-    coverImage: "https://picsum.photos/seed/8/800/400",
-    reviews: [
-      { id: "r1", author: "绿叶", avatar: "🌱", content: "在这里学到了很多环保知识，也真正把环保行动落到了实处。", rating: 4, date: "2024-02-25" },
-    ],
-    timeline: [
-      { date: "2024-04-22", event: "地球日活动", description: "举办校园环保周系列活动" },
-      { date: "2024-06-05", event: "环境日宣传", description: "公益宣传绿色生活理念" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)",
   },
   {
     id: "9",
@@ -215,14 +177,8 @@ export const clubs: Club[] = [
     customQuestions: ["你对哪个国际议题最感兴趣", "你有MUN经历吗"],
     matchKeywords: ["学术研究", "社交活力", "技术探索", "国际视野"],
     memberCount: 58,
-    coverImage: "https://picsum.photos/seed/9/800/400",
-    reviews: [
-      { id: "r1", author: "子悦", avatar: "🌍", content: "MUN训练了我的演讲和辩论能力，视野也开阔了很多。", rating: 5, date: "2024-03-15" },
-    ],
-    timeline: [
-      { date: "2024-10-01", event: "新生培训营", description: "MUN基础知识培训" },
-      { date: "2024-11-15", event: "校内模拟联合国", description: "举办全校MUN大会" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
   },
   {
     id: "10",
@@ -239,14 +195,8 @@ export const clubs: Club[] = [
     customQuestions: ["你的英语水平如何（四六级/托福）", "你有公开演讲经验吗"],
     matchKeywords: ["学术研究", "社交活力", "创意表达"],
     memberCount: 44,
-    coverImage: "https://picsum.photos/seed/10/800/400",
-    reviews: [
-      { id: "r1", author: "Emily", avatar: "🎙️", content: "在这里演讲技巧突飞猛进，还交到了很多英语好朋友！", rating: 5, date: "2024-02-18" },
-    ],
-    timeline: [
-      { date: "2024-09-20", event: "新生演讲工作坊", description: "零基础演讲入门" },
-      { date: "2024-12-10", event: "年度TED演讲夜", description: "成员精彩演讲展示" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
   },
   {
     id: "11",
@@ -263,16 +213,8 @@ export const clubs: Club[] = [
     customQuestions: ["你掌握哪些编程语言", "介绍你做过的一个项目"],
     matchKeywords: ["技术探索", "创新创业", "学术研究"],
     memberCount: 83,
-    coverImage: "https://picsum.photos/seed/11/800/400",
-    reviews: [
-      { id: "r1", author: "码农阿飞", avatar: "💻", content: "这里大神很多，每次技术分享都能学到新东西，成长很快。", rating: 5, date: "2024-01-22" },
-      { id: "r2", author: "小白鼠", avatar: "🖥️", content: "零基础加入，现在已经能独立做项目了！导师很耐心。", rating: 5, date: "2024-03-10" },
-    ],
-    timeline: [
-      { date: "2024-09-15", event: "秋季纳新", description: "招募技术新血" },
-      { date: "2024-10-20", event: "黑客马拉松", description: "48小时极限编程挑战" },
-      { date: "2024-12-15", event: "年终项目展", description: "成员项目成果展示" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
   },
   {
     id: "12",
@@ -289,206 +231,8 @@ export const clubs: Club[] = [
     customQuestions: ["你有什么创业想法", "你认为自己的核心优势是什么"],
     matchKeywords: ["创新创业", "技术探索", "社交活力"],
     memberCount: 69,
-    coverImage: "https://picsum.photos/seed/12/800/400",
-    reviews: [
-      { id: "r1", author: "超级创客", avatar: "🚀", content: "在这里认识了很多优秀的创业伙伴，我们的项目已经获得了天使投资！", rating: 5, date: "2024-02-28" },
-    ],
-    timeline: [
-      { date: "2024-09-25", event: "秋季路演", description: "创业项目路演大会" },
-      { date: "2024-11-30", event: "商业计划大赛", description: "优秀项目获取孵化资源" },
-    ],
-  },
-  {
-    id: "13",
-    name: "街舞嘻哈社",
-    category: "文艺",
-    tags: ["街舞", "嘻哈", "表演"],
-    description: "释放能量，用舞步讲述故事！我们汇聚了各种街舞风格：Breaking、Popping、Locking、Waacking…不管是零基础还是老手，这里都有你的舞台。",
-    activities: ["每周训练", "校内街舞大赛", "社团联合演出", "街舞workshop"],
-    atmosphere: "自由奔放，青春活力",
-    hoursPerWeek: 5,
-    beginnerFriendly: 4,
-    isRecruiting: true,
-    recruitmentDirections: ["Breaking组", "Popping组", "综合组"],
-    customQuestions: ["你有街舞基础吗", "你最喜欢哪种街舞风格"],
-    matchKeywords: ["创意表达", "艺术", "社交活力", "表演"],
-    memberCount: 61,
-    coverImage: "https://picsum.photos/seed/13/800/400",
-    reviews: [
-      { id: "r1", author: "Funky凯", avatar: "🕺", content: "这里超自由，每个人都有自己的风格，不会强迫你跳什么。", rating: 5, date: "2024-02-05" },
-    ],
-    timeline: [
-      { date: "2024-09-12", event: "秋季纳新", description: "公开课免费体验" },
-      { date: "2024-11-25", event: "校园街舞大赛", description: "各组别争夺冠军" },
-    ],
-  },
-  {
-    id: "14",
-    name: "辩论协会",
-    category: "学术",
-    tags: ["辩论", "逻辑", "演讲"],
-    description: "思维的碰撞，语言的艺术。辩论协会致力于提升同学的逻辑思维、表达能力和批判性思考，通过激烈的辩论，磨砺思想的锋芒。",
-    activities: ["辩论训练", "校内辩论赛", "友谊赛", "辩论讲座"],
-    atmosphere: "严谨理性，思维锋利",
-    hoursPerWeek: 4,
-    beginnerFriendly: 3,
-    isRecruiting: true,
-    recruitmentDirections: ["正方辩手", "反方辩手", "赛务志愿者"],
-    customQuestions: ["你对哪类辩题最感兴趣", "介绍一次你印象深刻的辩论经历"],
-    matchKeywords: ["学术研究", "社交活力", "创意表达"],
-    memberCount: 52,
-    coverImage: "https://picsum.photos/seed/14/800/400",
-    reviews: [
-      { id: "r1", author: "论坛高手", avatar: "🗣️", content: "训练真的很系统，不只是说话快，更是教会我如何有逻辑地思考。", rating: 5, date: "2024-01-28" },
-    ],
-    timeline: [
-      { date: "2024-09-22", event: "新生辩论营", description: "辩论基础技能培训" },
-      { date: "2024-11-08", event: "校际辩论赛", description: "与全市高校同台竞技" },
-    ],
-  },
-  {
-    id: "15",
-    name: "厨艺美食社",
-    category: "文化",
-    tags: ["烹饪", "美食", "生活"],
-    description: "民以食为天，美食是最好的语言。我们探索各地美食文化，从家常菜到西式甜点，每周聚在一起动手做美食，分享美味的快乐。",
-    activities: ["每周烹饪课", "美食文化节", "菜系探索活动", "节日特别美食"],
-    atmosphere: "温馨热闹，共享美食",
-    hoursPerWeek: 3,
-    beginnerFriendly: 5,
-    isRecruiting: true,
-    recruitmentDirections: ["中餐组", "西点烘焙组", "饮品制作组"],
-    customQuestions: ["你会做哪些菜", "你最想学什么厨艺"],
-    matchKeywords: ["创意表达", "社交活力", "传统文化"],
-    memberCount: 49,
-    coverImage: "https://picsum.photos/seed/15/800/400",
-    reviews: [
-      { id: "r1", author: "吃货小爱", avatar: "🍳", content: "每次活动都能吃到超多好东西，而且大家都很友好！", rating: 5, date: "2024-03-02" },
-    ],
-    timeline: [
-      { date: "2024-09-20", event: "开学美食节", description: "各地美食大汇聚" },
-      { date: "2025-02-10", event: "新年年夜饭", description: "社员共享自制年夜饭" },
-    ],
-  },
-  {
-    id: "16",
-    name: "电子竞技社",
-    category: "技术",
-    tags: ["电竞", "游戏", "竞技"],
-    description: "电竞不是玩物丧志，而是追求卓越！我们以专业的态度对待游戏，组织各类校内外电竞赛事，培养团队协作和竞技精神。",
-    activities: ["日常训练", "校内联赛", "跨校邀请赛", "电竞直播"],
-    atmosphere: "竞技专业，热血激情",
-    hoursPerWeek: 6,
-    beginnerFriendly: 3,
-    isRecruiting: true,
-    recruitmentDirections: ["LOL组", "CS2组", "王者荣耀组", "赛事运营"],
-    customQuestions: ["你玩什么游戏，段位如何", "你对电竞比赛有什么理解"],
-    matchKeywords: ["技术探索", "团队协作", "竞技"],
-    memberCount: 78,
-    coverImage: "https://picsum.photos/seed/16/800/400",
-    reviews: [
-      { id: "r1", author: "电竞少年", avatar: "🎮", content: "在这里打比赛才明白什么叫真正的团队配合，游戏水平涨了一大截！", rating: 4, date: "2024-02-22" },
-    ],
-    timeline: [
-      { date: "2024-09-18", event: "赛季开幕", description: "新学年联赛正式开始" },
-      { date: "2024-12-08", event: "年度总决赛", description: "各项目总决赛" },
-    ],
-  },
-  {
-    id: "17",
-    name: "瑜伽冥想社",
-    category: "运动",
-    tags: ["瑜伽", "冥想", "健康"],
-    description: "在忙碌的大学生活中找到内心的平静。我们提供专业的瑜伽和冥想课程，帮助同学们舒缓压力、提升专注力，培养身心健康的生活方式。",
-    activities: ["每日瑜伽课", "冥想工作坊", "户外正念体验", "压力管理讲座"],
-    atmosphere: "安静舒适，身心平衡",
-    hoursPerWeek: 3,
-    beginnerFriendly: 5,
-    isRecruiting: true,
-    recruitmentDirections: ["瑜伽教学组", "冥想引导组", "活动策划组"],
-    customQuestions: ["你有瑜伽或冥想经验吗", "你希望通过瑜伽获得什么"],
-    matchKeywords: ["健康生活", "公益服务", "创意表达"],
-    memberCount: 35,
-    coverImage: "https://picsum.photos/seed/17/800/400",
-    reviews: [
-      { id: "r1", author: "静心姐", avatar: "🧘", content: "期末考前参加冥想课，效果超好，焦虑少了很多，推荐给每个同学！", rating: 5, date: "2024-01-08" },
-    ],
-    timeline: [
-      { date: "2024-09-05", event: "新学期开放日", description: "免费体验瑜伽课" },
-      { date: "2024-06-21", event: "夏至特别活动", description: "户外日出瑜伽" },
-    ],
-  },
-  {
-    id: "18",
-    name: "天文观测协会",
-    category: "学术",
-    tags: ["天文", "科学", "观测"],
-    description: "仰望星空，探索宇宙奥秘。我们拥有专业天文望远镜，定期组织观星活动，探讨天体物理，让对宇宙充满好奇的你在这里找到同伴。",
-    activities: ["夜间观星", "天文摄影", "学术讲座", "流星雨观测"],
-    atmosphere: "充满好奇，探索精神",
-    hoursPerWeek: 3,
-    beginnerFriendly: 4,
-    isRecruiting: true,
-    recruitmentDirections: ["观测组", "摄影组", "学术研究组"],
-    customQuestions: ["你最感兴趣的天体是什么", "你有天文观测经验吗"],
-    matchKeywords: ["学术研究", "技术探索", "创意表达"],
-    memberCount: 30,
-    coverImage: "https://picsum.photos/seed/18/800/400",
-    reviews: [
-      { id: "r1", author: "星空追寻者", avatar: "🔭", content: "第一次看到土星环的那一刻，真的被震撼了，推荐每个人都来体验！", rating: 5, date: "2024-03-18" },
-    ],
-    timeline: [
-      { date: "2024-08-12", event: "英仙座流星雨", description: "夜间观测英仙座流星雨" },
-      { date: "2024-11-18", event: "狮子座流星雨", description: "秋季流星雨联合观测" },
-    ],
-  },
-  {
-    id: "19",
-    name: "动漫文化社",
-    category: "文化",
-    tags: ["动漫", "cosplay", "二次元"],
-    description: "二次元也是我们的主场！我们聚集了热爱动漫、漫画、轻小说的同学，定期举办动漫展、Cosplay活动和同人创作分享，打造校园二次元文化圈。",
-    activities: ["动漫展映", "Cosplay大赛", "同人创作", "声优讲座"],
-    atmosphere: "活泼有趣，创意无限",
-    hoursPerWeek: 3,
-    beginnerFriendly: 5,
-    isRecruiting: true,
-    recruitmentDirections: ["绘画创作组", "Cosplay组", "活动策划组"],
-    customQuestions: ["你最喜欢的动漫是什么", "你有绘画或制作Cos服装的经验吗"],
-    matchKeywords: ["创意表达", "艺术", "社交活力"],
-    memberCount: 91,
-    coverImage: "https://picsum.photos/seed/19/800/400",
-    reviews: [
-      { id: "r1", author: "二次元战士", avatar: "🎌", content: "终于找到了志同道合的朋友！大家聊动漫超嗨，还能一起做手办。", rating: 5, date: "2024-02-12" },
-    ],
-    timeline: [
-      { date: "2024-05-04", event: "动漫文化节", description: "校园最大规模动漫主题活动" },
-      { date: "2024-10-30", event: "万圣节Cosplay", description: "主题Cosplay巡游" },
-    ],
-  },
-  {
-    id: "20",
-    name: "国际交流协会",
-    category: "文化",
-    tags: ["国际交流", "语言", "文化"],
-    description: "连接世界，从校园开始。我们促进中外学生之间的文化交流，组织语言交换、国际文化节和海外游学项目，让你不出国门也能体验国际化氛围。",
-    activities: ["语言交换活动", "国际文化节", "留学经验分享", "海外游学"],
-    atmosphere: "开放包容，国际视野",
-    hoursPerWeek: 3,
-    beginnerFriendly: 5,
-    isRecruiting: true,
-    recruitmentDirections: ["中外学生联络", "活动策划", "翻译志愿者"],
-    customQuestions: ["你会哪些外语", "你有过跨文化交流经历吗"],
-    matchKeywords: ["社交活力", "学术研究", "国际视野"],
-    memberCount: 58,
-    coverImage: "https://picsum.photos/seed/20/800/400",
-    reviews: [
-      { id: "r1", author: "环球旅行者", avatar: "🌏", content: "认识了很多来自不同国家的朋友，视野真的打开了！", rating: 5, date: "2024-03-20" },
-    ],
-    timeline: [
-      { date: "2024-05-20", event: "国际文化节", description: "40+国家文化展示" },
-      { date: "2024-12-01", event: "圣诞文化交流", description: "中外学生共迎圣诞" },
-    ],
+    coverImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop&q=80",
+    gradientBg: "linear-gradient(135deg, #f7971e 0%, #ffd200 100%)",
   },
 ];
 
