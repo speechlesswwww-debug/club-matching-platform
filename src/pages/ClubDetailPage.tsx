@@ -191,7 +191,7 @@ export function ClubDetailPage() {
                       </div>
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">{review.content}</p>
-                    <p className="text-xs text-gray-300 dark:text-gray-600 mt-1">{review.date}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{review.date}</p>
                   </div>
                 ))}
               </div>

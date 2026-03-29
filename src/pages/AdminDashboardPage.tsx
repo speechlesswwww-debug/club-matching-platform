@@ -193,7 +193,7 @@ export function AdminDashboardPage() {
                     <span className="text-xs bg-orange-50 dark:bg-orange-900/20 text-orange-500 px-2 py-0.5 rounded-full">
                       {a.profile}
                     </span>
-                    <span className="text-xs text-gray-300 dark:text-gray-600">{a.time}</span>
+                    <span className="text-xs text-gray-400 dark:text-gray-500">{a.time}</span>
                   </div>
                 </div>
               ))}
