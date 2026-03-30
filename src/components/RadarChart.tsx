@@ -7,6 +7,8 @@ export function RadarChart({ data, size = 200 }: RadarChartProps) {
   const center = size / 2;
   const radius = (size / 2) * 0.7;
   const n = data.length;
+  const gradientId = "radar-gradient";
+  const glowId = "radar-glow";
 
   const getPoint = (index: number, r: number) => {
     const angle = (Math.PI * 2 * index) / n - Math.PI / 2;
@@ -27,7 +29,18 @@ export function RadarChart({ data, size = 200 }: RadarChartProps) {
 
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="overflow-visible">
-      {/* Grid circles */}
+      <defs>
+        <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f97316" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="#fbbf24" stopOpacity="0.3" />
+        </linearGradient>
+        <filter id={glowId}>
+          <feGaussianBlur stdDeviation="2" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+
+      {/* Grid polygons */}
       {gridLevels.map((level, li) => {
         const gridPoints = data.map((_, i) => getPoint(i, radius * level));
         const path = gridPoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ") + " Z";
@@ -58,12 +71,15 @@ export function RadarChart({ data, size = 200 }: RadarChartProps) {
         );
       })}
 
-      {/* Data area */}
-      <path d={dataPath} fill="rgba(249,115,22,0.2)" stroke="#f97316" strokeWidth="2" />
+      {/* Data area with gradient fill and glow */}
+      <path d={dataPath} fill={`url(#${gradientId})`} stroke="#f97316" strokeWidth="2" strokeOpacity="0.9" filter={`url(#${glowId})`} />
 
       {/* Data points */}
       {dataPoints.map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r="4" fill="#f97316" />
+        <g key={i}>
+          <circle cx={p.x} cy={p.y} r="5" fill="white" stroke="#f97316" strokeWidth="2" />
+          <circle cx={p.x} cy={p.y} r="2.5" fill="#f97316" />
+        </g>
       ))}
 
       {/* Labels */}
@@ -79,6 +95,7 @@ export function RadarChart({ data, size = 200 }: RadarChartProps) {
             dominantBaseline="middle"
             fontSize="10"
             fill="currentColor"
+            fontWeight="500"
             className="text-gray-600 dark:text-gray-400"
           >
             {d.label}
