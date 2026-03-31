@@ -1,9 +1,48 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../hooks/useToast";
+import { ToastContainer } from "../components/ToastContainer";
+
+type ModalType = "register" | "forgot" | null;
 
 export function StudentLoginPage() {
   const nav = useNavigate();
+  const { toasts, addToast, removeToast } = useToast();
+  const [modal, setModal] = useState<ModalType>(null);
+  // Register form
+  const [regStudentId, setRegStudentId] = useState("");
+  const [regName, setRegName] = useState("");
+  const [regMajor, setRegMajor] = useState("");
+  const [regPassword, setRegPassword] = useState("");
+  const [regConfirm, setRegConfirm] = useState("");
+  // Forgot form
+  const [forgotStudentId, setForgotStudentId] = useState("");
+  const [forgotPhone, setForgotPhone] = useState("");
+
+  function handleRegister() {
+    if (!regStudentId || !regName || !regMajor || !regPassword || !regConfirm) {
+      addToast("请填写所有必填项", "error");
+      return;
+    }
+    if (regPassword !== regConfirm) {
+      addToast("两次密码不一致", "error");
+      return;
+    }
+    addToast("注册成功！欢迎加入 JoinU", "success");
+    setModal(null);
+  }
+
+  function handleForgotPassword() {
+    if (!forgotStudentId || !forgotPhone) {
+      addToast("请填写学号和手机号", "error");
+      return;
+    }
+    addToast("验证码已发送（Demo模式）", "info");
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <ToastContainer toasts={toasts} removeToast={removeToast} />
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-16 -right-16 w-64 h-64 bg-orange-200/40 dark:bg-orange-900/20 rounded-full blur-3xl animate-blob" />
@@ -57,6 +96,21 @@ export function StudentLoginPage() {
             开始体验 Demo →
           </button>
           <p className="text-center text-xs text-gray-400 dark:text-gray-500">点击按钮即可直接体验，无需真实账号</p>
+          {/* Register & Forgot */}
+          <div className="flex items-center justify-between pt-1">
+            <button
+              onClick={() => setModal("register")}
+              className="text-xs text-orange-500 hover:text-orange-600 font-medium transition-colors"
+            >
+              还没有账号？注册
+            </button>
+            <button
+              onClick={() => setModal("forgot")}
+              className="text-xs text-gray-400 dark:text-gray-500 hover:text-orange-500 transition-colors"
+            >
+              忘记密码？
+            </button>
+          </div>
         </div>
 
         <div className="mt-6 grid grid-cols-3 gap-3 text-center">
@@ -72,6 +126,122 @@ export function StudentLoginPage() {
           ))}
         </div>
       </div>
+
+      {/* Register Modal */}
+      {modal === "register" && (
+        <div
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+          onClick={() => setModal(null)}
+        >
+          <div
+            className="w-full max-w-sm bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-2xl animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-5 text-center">📋 新生注册</h2>
+            <div className="space-y-3">
+              {[
+                { label: "学号", value: regStudentId, setter: setRegStudentId, placeholder: "输入学号" },
+                { label: "姓名", value: regName, setter: setRegName, placeholder: "输入真实姓名" },
+                { label: "专业", value: regMajor, setter: setRegMajor, placeholder: "输入专业名称" },
+              ].map(({ label, value, setter, placeholder }) => (
+                <div key={label}>
+                  <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1">{label}</label>
+                  <input
+                    value={value}
+                    onChange={(e) => setter(e.target.value)}
+                    placeholder={placeholder}
+                    className="w-full border border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300/40 focus:border-orange-400"
+                  />
+                </div>
+              ))}
+              <div>
+                <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1">密码</label>
+                <input
+                  type="password"
+                  value={regPassword}
+                  onChange={(e) => setRegPassword(e.target.value)}
+                  placeholder="设置密码"
+                  className="w-full border border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300/40 focus:border-orange-400"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1">确认密码</label>
+                <input
+                  type="password"
+                  value={regConfirm}
+                  onChange={(e) => setRegConfirm(e.target.value)}
+                  placeholder="再次输入密码"
+                  className="w-full border border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300/40 focus:border-orange-400"
+                />
+              </div>
+            </div>
+            <div className="flex gap-3 mt-5">
+              <button
+                onClick={() => setModal(null)}
+                className="flex-1 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 rounded-xl py-3 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                取消
+              </button>
+              <button
+                onClick={handleRegister}
+                className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl py-3 text-sm font-bold hover:from-orange-600 hover:to-amber-600 transition-all shadow-md"
+              >
+                注册
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Forgot Password Modal */}
+      {modal === "forgot" && (
+        <div
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+          onClick={() => setModal(null)}
+        >
+          <div
+            className="w-full max-w-sm bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-2xl animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2 text-center">🔑 找回密码</h2>
+            <p className="text-xs text-gray-400 dark:text-gray-500 text-center mb-5">验证身份后重置密码</p>
+            <div className="space-y-3">
+              <div>
+                <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1">学号</label>
+                <input
+                  value={forgotStudentId}
+                  onChange={(e) => setForgotStudentId(e.target.value)}
+                  placeholder="输入你的学号"
+                  className="w-full border border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300/40 focus:border-orange-400"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1">手机号</label>
+                <input
+                  value={forgotPhone}
+                  onChange={(e) => setForgotPhone(e.target.value)}
+                  placeholder="输入注册时的手机号"
+                  className="w-full border border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300/40 focus:border-orange-400"
+                />
+              </div>
+            </div>
+            <div className="flex gap-3 mt-5">
+              <button
+                onClick={() => setModal(null)}
+                className="flex-1 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 rounded-xl py-3 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                取消
+              </button>
+              <button
+                onClick={handleForgotPassword}
+                className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl py-3 text-sm font-bold hover:from-orange-600 hover:to-amber-600 transition-all shadow-md"
+              >
+                发送验证码
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

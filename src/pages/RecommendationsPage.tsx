@@ -5,6 +5,7 @@ import type { ClubMatch } from "../types";
 import { BottomNav } from "../components/BottomNav";
 import { CircularProgress } from "../components/CircularProgress";
 import { RadarChart } from "../components/RadarChart";
+import { useAssessmentResult } from "../hooks/useAssessmentResult";
 
 const PROFILE_RADAR: Record<string, number[]> = {
   创意表达型: [9, 3, 6, 4, 5, 2],
@@ -29,8 +30,33 @@ export function RecommendationsPage() {
   const nav = useNavigate();
   const location = useLocation();
   const state = location.state as { keywords: string[]; profile: string } | null;
-  const keywords = state?.keywords || ["创意表达"];
-  const profile = state?.profile || "创意表达型";
+  const { result } = useAssessmentResult();
+
+  // Use state from navigation or fallback to stored result
+  const keywords = state?.keywords || result?.keywords || null;
+  const profile = state?.profile || result?.profileType || null;
+
+  if (!keywords || !profile) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-orange-50/50 dark:bg-gray-900">
+        <div className="text-center">
+          <div className="text-6xl mb-4">🎯</div>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">你还没有完成测评</h2>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-8 leading-relaxed">
+            完成 AI 测评后，我们会为你<br />推荐最适合的社团！
+          </p>
+          <button
+            onClick={() => nav("/student/assessment")}
+            className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-3 rounded-2xl text-sm font-bold hover:from-orange-600 hover:to-amber-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+          >
+            去测评 ✨
+          </button>
+        </div>
+        <BottomNav active="assessment" />
+      </div>
+    );
+  }
+
   const matches = matchClubs(keywords);
   const profileInfo = profileTypes[profile] || { emoji: "🌟", desc: "综合型人才" };
   const radarValues = PROFILE_RADAR[profile] || [5, 5, 5, 5, 5, 5];
@@ -102,32 +128,47 @@ export function RecommendationsPage() {
 
         <div className="space-y-4">
           {matches.map((match: ClubMatch, idx: number) => (
-            <button
+            <div
               key={match.club.id}
-              onClick={() => nav(`/student/club/${match.club.id}`)}
-              className="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden text-left hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 border border-gray-100/50 dark:border-gray-700/50"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden border border-gray-100/50 dark:border-gray-700/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
               style={{ animationDelay: `${idx * 0.08}s` }}
             >
-              <div className="relative">
-                <img src={match.club.coverImage} alt={match.club.name} className="w-full h-28 object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                <div className={`absolute top-2 left-2 w-8 h-8 rounded-full bg-gradient-to-br ${RANK_GRADIENTS[idx] || RANK_GRADIENTS[4]} ${idx < 3 ? "text-white" : "text-orange-600"} text-sm font-bold flex items-center justify-center shadow`}>
-                  {idx + 1}
-                </div>
-              </div>
-              <div className="p-4 flex items-center gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-bold text-gray-900 dark:text-white">{match.club.name}</h3>
-                    <span className="text-xs bg-orange-50 dark:bg-orange-900/20 text-orange-500 px-2 py-0.5 rounded-full font-medium">
-                      {match.club.category}
-                    </span>
+              <button
+                onClick={() => nav(`/student/club/${match.club.id}`)}
+                className="w-full text-left"
+              >
+                <div className="relative">
+                  <img src={match.club.coverImage} alt={match.club.name} className="w-full h-28 object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  <div className={`absolute top-2 left-2 w-8 h-8 rounded-full bg-gradient-to-br ${RANK_GRADIENTS[idx] || RANK_GRADIENTS[4]} ${idx < 3 ? "text-white" : "text-orange-600"} text-sm font-bold flex items-center justify-center shadow`}>
+                    {idx + 1}
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{match.reason}</p>
                 </div>
-                <CircularProgress score={match.score} size={56} strokeWidth={5} />
-              </div>
-            </button>
+                <div className="p-4 flex items-center gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-bold text-gray-900 dark:text-white">{match.club.name}</h3>
+                      <span className="text-xs bg-orange-50 dark:bg-orange-900/20 text-orange-500 px-2 py-0.5 rounded-full font-medium">
+                        {match.club.category}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{match.reason}</p>
+                  </div>
+                  <CircularProgress score={match.score} size={56} strokeWidth={5} />
+                </div>
+              </button>
+              {/* Apply button */}
+              {match.club.isRecruiting && (
+                <div className="px-4 pb-4">
+                  <button
+                    onClick={() => nav(`/student/apply/${match.club.id}`)}
+                    className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl py-2.5 text-sm font-bold hover:from-orange-600 hover:to-amber-600 transition-all shadow-sm"
+                  >
+                    申请加入 →
+                  </button>
+                </div>
+              )}
+            </div>
           ))}
         </div>
 

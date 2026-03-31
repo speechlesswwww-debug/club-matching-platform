@@ -2,12 +2,16 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { clubs } from "../data";
 import { useFavorites } from "../hooks/useFavorites";
+import { useAssessmentResult } from "../hooks/useAssessmentResult";
+import { matchClubs } from "../matching";
+import { CircularProgress } from "../components/CircularProgress";
 
 export function ClubDetailPage() {
   const { id } = useParams();
   const nav = useNavigate();
   const club = clubs.find((c) => c.id === id);
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { result } = useAssessmentResult();
   const [showApplyModal, setShowApplyModal] = useState(false);
   const [galleryIdx, setGalleryIdx] = useState(0);
 
@@ -30,6 +34,14 @@ export function ClubDetailPage() {
     `https://picsum.photos/seed/${club.id}a/800/400`,
     `https://picsum.photos/seed/${club.id}b/800/400`,
   ];
+
+  // Calculate match score if user has assessment result
+  let matchScore: number | null = null;
+  if (result?.keywords) {
+    const matches = matchClubs(result.keywords);
+    const found = matches.find((m) => m.club.id === club.id);
+    if (found) matchScore = found.score;
+  }
 
   return (
     <div className="min-h-screen pb-28 bg-orange-50/50 dark:bg-gray-900">
@@ -103,6 +115,30 @@ export function ClubDetailPage() {
         </div>
 
         <div className="px-4 pt-5">
+          {/* Match score + deadline */}
+          {(matchScore !== null || club.recruitmentDeadline) && (
+            <div className="flex items-center gap-3 mb-4">
+              {matchScore !== null && (
+                <div className="flex items-center gap-2 bg-orange-50 dark:bg-orange-900/20 rounded-2xl px-3 py-2 border border-orange-100 dark:border-orange-900/30">
+                  <CircularProgress score={matchScore} size={44} strokeWidth={4} />
+                  <div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">AI 匹配度</p>
+                    <p className="text-sm font-bold text-orange-500">{matchScore}分</p>
+                  </div>
+                </div>
+              )}
+              {club.recruitmentDeadline && (
+                <div className="flex items-center gap-2 bg-red-50 dark:bg-red-900/20 rounded-2xl px-3 py-2 border border-red-100 dark:border-red-900/30 flex-1">
+                  <span className="text-red-400 text-lg">⏰</span>
+                  <div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">报名截止</p>
+                    <p className="text-sm font-bold text-red-500">{club.recruitmentDeadline}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-5">
             {club.tags.map((tag) => (
@@ -149,6 +185,31 @@ export function ClubDetailPage() {
               </div>
             ))}
           </div>
+
+          {/* Recruitment process */}
+          {club.recruitmentProcess && club.recruitmentProcess.length > 0 && (
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-4 mb-4 border border-gray-100/50 dark:border-gray-700/50">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <span className="w-1 h-4 rounded-full bg-gradient-to-b from-orange-400 to-amber-400 inline-block" />
+                招募流程
+              </h3>
+              <div className="flex items-start gap-0 overflow-x-auto pb-2">
+                {club.recruitmentProcess.map((step, i) => (
+                  <div key={i} className="flex items-center flex-shrink-0">
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-amber-400 flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                        {i + 1}
+                      </div>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5 text-center max-w-[64px]">{step}</p>
+                    </div>
+                    {i < club.recruitmentProcess!.length - 1 && (
+                      <div className="w-8 h-0.5 bg-gradient-to-r from-orange-300 to-amber-300 mt-[-18px] flex-shrink-0" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Recruitment timeline */}
           {club.timeline && club.timeline.length > 0 && (

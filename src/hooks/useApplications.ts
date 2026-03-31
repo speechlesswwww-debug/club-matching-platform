@@ -14,5 +14,13 @@ export function useApplications() {
     return newApp;
   };
 
-  return { applications, addApplication };
+  const getApplicationByClubId = (clubId: string): Application | undefined => {
+    return applications.find((a) => a.clubId === clubId);
+  };
+
+  const updateApplicationStatus = (id: string, status: Application["status"]) => {
+    setApplications((prev) => prev.map((a) => (a.id === id ? { ...a, status } : a)));
+  };
+
+  return { applications, addApplication, getApplicationByClubId, updateApplicationStatus };
 }
