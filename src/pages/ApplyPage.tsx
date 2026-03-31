@@ -18,6 +18,7 @@ export function ApplyPage() {
   const [step, setStep] = useState<Step>(1);
   const [submitted, setSubmitted] = useState(false);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [multiAnswers, setMultiAnswers] = useState<Record<string, string[]>>({});
   const [intro, setIntro] = useState("");
   const [name, setName] = useState("");
   const [major, setMajor] = useState("");
@@ -47,6 +48,22 @@ export function ApplyPage() {
     return Object.keys(e).length === 0;
   }
 
+  function validateStep3() {
+    if (!club || !club.structuredQuestions) return true;
+    const e: Record<string, boolean> = {};
+    club.structuredQuestions.forEach((q) => {
+      if (q.required) {
+        if (q.type === "multiple") {
+          if (!multiAnswers[q.id] || multiAnswers[q.id].length === 0) e[q.id] = true;
+        } else {
+          if (!answers[q.id] || !answers[q.id].trim()) e[q.id] = true;
+        }
+      }
+    });
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  }
+
   function handleNext() {
     if (step === 1 && !validateStep1()) return;
     if (step === 2 && !validateStep2()) return;
@@ -54,12 +71,24 @@ export function ApplyPage() {
   }
 
   const handleSubmit = () => {
+    if (!validateStep3()) return;
     if (!club) return;
+    // Build combined answers
+    const combinedAnswers: Record<string, string> = { ...answers };
+    Object.entries(multiAnswers).forEach(([k, v]) => {
+      combinedAnswers[k] = v.join("、");
+    });
+
     addApplication({
       clubId: club.id,
       clubName: club.name,
       status: "待审核",
       appliedAt: new Date().toISOString().split("T")[0],
+      direction: club.recruitmentDirections[0] || "",
+      selfIntro: intro,
+      name,
+      major,
+      answers: combinedAnswers,
     });
     addToast(`已成功申请加入 ${club.name}！`, "success");
     setSubmitted(true);
@@ -247,21 +276,90 @@ export function ApplyPage() {
         {/* Step 3: Custom questions */}
         {step === 3 && (
           <div className="space-y-4 animate-fade-in">
-            {club.customQuestions.map((q, idx) => (
-              <div key={idx} className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-4 border border-gray-100/50 dark:border-gray-700/50">
-                <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 block mb-2">
-                  <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-500 text-xs font-bold mr-1.5">{idx + 1}</span>
-                  {q}
-                </label>
-                <textarea
-                  value={answers[idx] || ""}
-                  onChange={(e) => setAnswers({ ...answers, [idx]: e.target.value })}
-                  rows={3}
-                  className="w-full border border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300/40 focus:border-orange-400 transition-all resize-none"
-                  placeholder="请填写你的回答..."
-                />
-              </div>
-            ))}
+            {club.structuredQuestions && club.structuredQuestions.length > 0 ? (
+              club.structuredQuestions.map((q, idx) => (
+                <div key={q.id} className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-4 border border-gray-100/50 dark:border-gray-700/50">
+                  <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 block mb-3">
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-500 text-xs font-bold mr-1.5">{idx + 1}</span>
+                    {q.question}
+                    {q.required && <span className="text-red-400 ml-1">*</span>}
+                  </label>
+                  {errors[q.id] && <p className="text-xs text-red-400 mb-2">此项为必填</p>}
+                  {q.type === "text" && (
+                    <textarea
+                      value={answers[q.id] || ""}
+                      onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })}
+                      rows={3}
+                      className={`w-full border rounded-xl px-3 py-2.5 text-sm dark:bg-gray-900 dark:text-white focus:outline-none focus:ring-2 resize-none transition-all ${
+                        errors[q.id] ? "border-red-400 focus:ring-red-200" : "border-gray-200 dark:border-gray-700 focus:ring-orange-300/40 focus:border-orange-400"
+                      }`}
+                      placeholder="请填写你的回答..."
+                    />
+                  )}
+                  {q.type === "single" && q.options && (
+                    <div className="space-y-2">
+                      {q.options.map((opt) => (
+                        <label key={opt} className="flex items-center gap-3 cursor-pointer">
+                          <input
+                            type="radio"
+                            name={q.id}
+                            value={opt}
+                            checked={answers[q.id] === opt}
+                            onChange={() => setAnswers({ ...answers, [q.id]: opt })}
+                            className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-400"
+                          />
+                          <span className={`text-sm transition-colors ${answers[q.id] === opt ? "text-orange-500 font-medium" : "text-gray-700 dark:text-gray-300"}`}>
+                            {opt}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                  {q.type === "multiple" && q.options && (
+                    <div className="space-y-2">
+                      {q.options.map((opt) => (
+                        <label key={opt} className="flex items-center gap-3 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            value={opt}
+                            checked={(multiAnswers[q.id] || []).includes(opt)}
+                            onChange={(e) => {
+                              const current = multiAnswers[q.id] || [];
+                              setMultiAnswers({
+                                ...multiAnswers,
+                                [q.id]: e.target.checked
+                                  ? [...current, opt]
+                                  : current.filter((v) => v !== opt),
+                              });
+                            }}
+                            className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-400"
+                          />
+                          <span className={`text-sm transition-colors ${(multiAnswers[q.id] || []).includes(opt) ? "text-orange-500 font-medium" : "text-gray-700 dark:text-gray-300"}`}>
+                            {opt}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))
+            ) : (
+              club.customQuestions.map((q, idx) => (
+                <div key={idx} className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-4 border border-gray-100/50 dark:border-gray-700/50">
+                  <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 block mb-2">
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-500 text-xs font-bold mr-1.5">{idx + 1}</span>
+                    {q}
+                  </label>
+                  <textarea
+                    value={answers[String(idx)] || ""}
+                    onChange={(e) => setAnswers({ ...answers, [String(idx)]: e.target.value })}
+                    rows={3}
+                    className="w-full border border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300/40 focus:border-orange-400 transition-all resize-none"
+                    placeholder="请填写你的回答..."
+                  />
+                </div>
+              ))
+            )}
           </div>
         )}
 

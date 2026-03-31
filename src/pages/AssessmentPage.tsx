@@ -1,22 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { assessmentQuestions } from "../data";
+import { assessmentQuestions, profileTypes } from "../data";
 import { getProfileFromKeywords } from "../matching";
 import { BottomNav } from "../components/BottomNav";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useAssessmentResult } from "../hooks/useAssessmentResult";
 
 type Phase = "intro" | "quiz" | "done";
 
 export function AssessmentPage() {
   const nav = useNavigate();
+  const { saveResult } = useAssessmentResult();
   const [phase, setPhase] = useState<Phase>("intro");
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [, setSavedProfile] = useLocalStorage<{ keywords: string[]; profile: string } | null>(
-    "joinu_profile",
-    null
-  );
 
   const question = assessmentQuestions[currentQ];
   const progress = ((currentQ + 1) / assessmentQuestions.length) * 100;
@@ -30,9 +27,15 @@ export function AssessmentPage() {
         setCurrentQ(currentQ + 1);
         setSelectedOption(null);
       } else {
-        const profile = getProfileFromKeywords(newKeywords);
-        setSavedProfile({ keywords: newKeywords, profile });
-        nav("/student/recommendations", { state: { keywords: newKeywords, profile } });
+        const profileType = getProfileFromKeywords(newKeywords);
+        const profileInfo = profileTypes[profileType] || { emoji: "🌟", desc: "综合型人才" };
+        saveResult({
+          profileType,
+          profileEmoji: profileInfo.emoji,
+          profileDescription: profileInfo.desc,
+          keywords: newKeywords,
+        });
+        nav("/student/recommendations", { state: { keywords: newKeywords, profile: profileType } });
       }
     }, 350);
   }
